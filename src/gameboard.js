@@ -1,7 +1,7 @@
 import { ship } from './ship.js';
 
 function gameBoard() {
-    let cols = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+    // let cols = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
     let board = [
         [
             { ship: null },
@@ -165,7 +165,97 @@ function placeShips(direction, row, col, board, ships, index) {
             return true;
         }
         for (let i = 0; i < ships[index].length; i++) {
-            if (col + i > 9 || col + i < 0) {
+            if (i === 0 || i === ships[index].length - 1) {
+                if (i === 0 && typeof board[row] !== 'undefined') {
+                    let tempArray = [];
+                    //
+                    if (
+                        typeof board[row - 1] === 'undefined' ||
+                        typeof board[row + 1] === 'undefined'
+                    ) {
+                        if (typeof board[row - 1] === 'undefined') {
+                            tempArray.push(board[row][col - 1]);
+                            tempArray.push(board[row + 1][col - 1]);
+                        } else if (typeof board[row + 1] === 'undefined') {
+                            tempArray.push(board[row][col - 1]);
+                            tempArray.push(board[row - 1][col - 1]);
+                        }
+                    } else {
+                        tempArray.push(board[row][col - 1]);
+                        tempArray.push(board[row - 1][col - 1]);
+                        tempArray.push(board[row + 1][col - 1]);
+                    }
+                    //
+                    tempArray = tempArray.filter((item) => {
+                        return typeof item !== 'undefined';
+                    });
+
+                    for (let j = 0; j < tempArray.length; j++) {
+                        if (tempArray[j].ship !== null) {
+                            return true;
+                        }
+                    }
+                } else if (
+                    (i === ships[index].length - 1 &&
+                        typeof board[row] !== 'undefined') ||
+                    typeof board[row - 1] !== 'undefined' ||
+                    typeof board[row + 1] !== 'undefined'
+                ) {
+                    let tempArray = [];
+                    //
+                    if (
+                        typeof board[row - 1] === 'undefined' ||
+                        typeof board[row + 1] === 'undefined'
+                    ) {
+                        if (typeof board[row - 1] === 'undefined') {
+                            tempArray.push(board[row][col + 1]);
+                            tempArray.push(board[row + 1][col + 1]);
+                        } else if (typeof board[row + 1] === 'undefined') {
+                            tempArray.push(board[row][col + 1]);
+                            tempArray.push(board[row - 1][col + 1]);
+                        }
+                    } else {
+                        tempArray.push(board[row][col + 1]);
+                        tempArray.push(board[row - 1][col + 1]);
+                        tempArray.push(board[row + 1][col + 1]);
+                    }
+                    //
+                    tempArray = tempArray.filter((item) => {
+                        return typeof item !== 'undefined';
+                    });
+
+                    for (let j = 0; j < tempArray.length; j++) {
+                        if (tempArray[j].ship !== null) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            let tempArray = [];
+            if (
+                typeof board[row - 1] !== 'undefined' &&
+                typeof board[row + 1] !== 'undefined'
+            ) {
+                tempArray.push(board[row - 1][col + i]);
+                tempArray.push(board[row + 1][col + i]);
+            } else if (typeof board[row - 1] !== 'undefined') {
+                tempArray.push(board[row - 1][col + i]);
+            } else {
+                tempArray.push(board[row + 1][col + i]);
+            }
+
+            tempArray = tempArray.filter((item) => {
+                return typeof item !== 'undefined';
+            });
+
+            for (let j = 0; j < tempArray.length; j++) {
+                if (tempArray[j].ship !== null) {
+                    return true;
+                }
+            }
+        }
+        for (let i = 0; i < ships[index].length; i++) {
+            if (typeof board[row][col + i] === 'undefined') {
                 return true;
             }
         }
@@ -175,8 +265,136 @@ function placeShips(direction, row, col, board, ships, index) {
             j++;
         }
     } else {
+        if (col > 9 || col < 0 || row > 9 || row < 0) {
+            return true;
+        }
         for (let i = 0; i < ships[index].length; i++) {
-            if (row + i > 9 || row + i < 0) {
+            if (i === 0 || i === ships[index].length - 1) {
+                if (
+                    i === 0 &&
+                    (typeof board[row - 1] !== 'undefined' ||
+                        typeof board[row + 1] !== 'undefined')
+                ) {
+                    let tempArray = [];
+                    //
+                    if (typeof board[row - 1] !== 'undefined') {
+                        if (
+                            typeof board[row][col + 1] === 'undefined' ||
+                            typeof board[row][col - 1] === 'undefined'
+                        ) {
+                            if (typeof board[row][col + 1] === 'undefined') {
+                                tempArray.push(board[row - 1][col]);
+                                tempArray.push(board[row - 1][col - 1]);
+                            } else if (
+                                typeof board[row][col - 1] === 'undefined'
+                            ) {
+                                tempArray.push(board[row - 1][col]);
+                                tempArray.push(board[row - 1][col + 1]);
+                            }
+                        } else {
+                            tempArray.push(board[row - 1][col]);
+                            tempArray.push(board[row - 1][col - 1]);
+                            tempArray.push(board[row - 1][col + 1]);
+                        }
+                    } else {
+                        if (
+                            typeof board[row][col + 1] === 'undefined' ||
+                            typeof board[row][col - 1] === 'undefined'
+                        ) {
+                            if (typeof board[row][col + 1] === 'undefined') {
+                                tempArray.push(board[row][col - 1]);
+                            } else if (
+                                typeof board[row][col - 1] === 'undefined'
+                            ) {
+                                tempArray.push(board[row][col + 1]);
+                            }
+                        } else {
+                            // tempArray.push(board[row][col - 1]);
+                            // tempArray.push(board[row][col + 1]);
+                        }
+                    }
+                    //
+                    // tempArray.push(board[row - 1][col]);
+                    // tempArray.push(board[row - 1][col - 1]);
+                    // tempArray.push(board[row - 1][col + 1]);
+
+                    tempArray = tempArray.filter((item) => {
+                        return typeof item !== 'undefined';
+                    });
+
+                    for (let j = 0; j < tempArray.length; j++) {
+                        if (tempArray[j].ship !== null) {
+                            return true;
+                        }
+                    }
+                } else if (
+                    i === ships[index].length - 1 &&
+                    typeof board[row + i + 1] !== 'undefined'
+                ) {
+                    let tempArray = [];
+                    //
+                    if (
+                        typeof board[row + i + 1][col + 1] === 'undefined' ||
+                        typeof board[row + i + 1][col - 1] === 'undefined'
+                    ) {
+                        if (typeof board[row + i][col + 1] === 'undefined') {
+                            tempArray.push(board[row + i + 1][col]);
+                            tempArray.push(board[row + i + 1][col - 1]);
+                        } else if (
+                            typeof board[row + i][col - 1] === 'undefined'
+                        ) {
+                            tempArray.push(board[row + i + 1][col]);
+                            tempArray.push(board[row + i + 1][col + 1]);
+                        }
+                    } else {
+                        tempArray.push(board[row + i + 1][col]);
+                        tempArray.push(board[row + i + 1][col - 1]);
+                        tempArray.push(board[row + i + 1][col + 1]);
+                    }
+                    //
+                    // tempArray.push(board[row + 1][col]);
+                    // tempArray.push(board[row + 1][col - 1]);
+                    // tempArray.push(board[row + 1][col + 1]);
+
+                    tempArray = tempArray.filter((item) => {
+                        return typeof item !== 'undefined';
+                    });
+
+                    for (let j = 0; j < tempArray.length; j++) {
+                        if (tempArray[j].ship !== null) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            let tempArray = [];
+            if (typeof board[row + i] === 'undefined') {
+                return true;
+            }
+            if (
+                typeof board[row + i][col - 1] !== 'undefined' &&
+                typeof board[row + i][col + 1] !== 'undefined'
+            ) {
+                tempArray.push(board[row + i][col - 1]);
+                tempArray.push(board[row + i][col + 1]);
+            } else if (typeof board[row + i][col - 1] !== 'undefined') {
+                tempArray.push(board[row + i][col - 1]);
+            } else {
+                tempArray.push(board[row + i][col + i]);
+            }
+
+            tempArray = tempArray.filter((item) => {
+                return typeof item !== 'undefined';
+            });
+
+            for (let j = 0; j < tempArray.length; j++) {
+                if (tempArray[j].ship !== null) {
+                    return true;
+                }
+            }
+        }
+        for (let i = 0; i < ships[index].length; i++) {
+            if (typeof board[row + i][col] === 'undefined') {
                 return true;
             }
         }
@@ -349,4 +567,5 @@ function placeShips(direction, row, col, board, ships, index) {
 
 // let ships = [carrier, battleship, destroyer, patrolBoat];
 // placeShips(6, 1, 9, board, ships, 1);
+// placeShips(3, 9, 0, board, ships, 1);
 export { gameBoard, placeShips };
