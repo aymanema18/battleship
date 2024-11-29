@@ -8,6 +8,7 @@ function ship(length, name, id) {
             if (hasBeenSunk) {
                 return msg;
             }
+            return `${name} got hit`;
         }
     }
     function isSunk() {
