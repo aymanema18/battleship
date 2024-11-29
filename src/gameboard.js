@@ -171,21 +171,6 @@ function gameBoard() {
         } while (typeof refBoard[tempRow][tempCol] === 'undefined');
         placeShips(direction, cords, board, refBoard, ships, i);
     }
-    // let firstFlag = true;
-    // let secondFlag = false;
-    // let index = 0;
-    // while (firstFlag) {
-    //     if (index > ships.length) {
-    //         break;
-    //     }
-    //     do {
-    //         let direction = Math.floor(Math.random() * 10);
-    //         let row = Math.floor(Math.random() * 10);
-    //         let col = Math.floor(Math.random() * 10);
-    //         secondFlag = placeShips(direction, row, col, board, ships, index);
-    //     } while (secondFlag);
-    //     index++;
-    // }
 
     function receiveAttack(cord1, cord2) {
         if (board[cord1][cord2].ship === null) {
@@ -204,11 +189,16 @@ function gameBoard() {
         }
     }
 
+    function toTest(newBoard) {
+        board = newBoard;
+    }
+
     return {
         get board() {
             return board;
         },
         receiveAttack,
+        toTest,
     };
 }
 
@@ -825,22 +815,23 @@ let refBoard = [
     ['90', '91', '92', '93', '94', '95', '96', '97', '98', '99'],
 ];
 
-for (let i = 0; i < 10; i++) {
-    let direction = Math.floor(Math.random() * 10);
-    let tempRow;
-    let tempCol;
-    let cords;
-    do {
-        tempRow = Math.floor(Math.random() * refBoard.length);
-        tempCol = Math.floor(Math.random() * refBoard[tempRow].length);
-        cords = refBoard[tempRow][tempCol];
-    } while (typeof refBoard[tempRow][tempCol] === 'undefined');
-    console.log(`i: ${i}`);
-    // console.log(`cords: ${cords}`);
-    // console.log(`direction: ${direction}`);
-    // console.log('--------');
-    placeShips(direction, cords, board, refBoard, ships, i);
-}
+// for (let i = 0; i < 10; i++) {
+//     let direction = Math.floor(Math.random() * 10);
+//     let tempRow;
+//     let tempCol;
+//     let cords;
+//     do {
+//         tempRow = Math.floor(Math.random() * refBoard.length);
+//         tempCol = Math.floor(Math.random() * refBoard[tempRow].length);
+//         cords = refBoard[tempRow][tempCol];
+//     } while (typeof refBoard[tempRow][tempCol] === 'undefined');
+//     console.log(`i: ${i}`);
+//     console.log(`cords: ${cords}`);
+//     console.log(`direction: ${direction}`);
+//     console.log('--------');
+//     placeShips(direction, cords, board, refBoard, ships, i);
+// }
+
 // placeShips(3, '04', board, refBoard, ships, 0);
 // placeShips(5, '89', board, refBoard, ships, 1);
 // placeShips(7, '67', board, refBoard, ships, 2);
