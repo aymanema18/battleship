@@ -8,7 +8,7 @@
 }
 
 :root {
-    --cell-size: 35px;
+    --cell-size: 30px;
 }
 
 body {
@@ -16,10 +16,38 @@ body {
     flex-direction: column;
     font-family: 'inter', Arial, Helvetica, sans-serif;
     justify-content: stretch;
-    /* align-items: center; */
+    align-items: center;
     height: 100vh;
     color: white;
     background-color: #609bf5;
+}
+
+header {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 50px;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    /* grid-template-columns: repeat(2, min-content);
+    grid-template-rows: min-content 150px;
+    justify-content: center;
+    grid-gap: 75px; */
+}
+
+.sections-container {
+    display: grid;
+    grid-template-columns: repeat(2, min-content);
+    justify-content: center;
+    grid-gap: 75px;
 }
 
 .board-cell,
@@ -27,7 +55,12 @@ body {
     border: 1px solid white;
 }
 
-.player-board {
+.board-cell,
+.ships-element {
+    /* cursor: pointer; */
+}
+
+.boards {
     display: grid;
     grid-template-columns: var(--cell-size) calc(var(--cell-size) * 10);
     grid-template-rows: repeat(11, var(--cell-size));
@@ -37,7 +70,8 @@ body {
     display: grid;
     grid-template-rows: repeat(10, var(--cell-size));
     grid-row: 2 / 12;
-    justify-content: end;
+    justify-content: center;
+    justify-items: end;
     align-items: center;
     font-weight: 700;
 }
@@ -60,7 +94,44 @@ body {
 }
 
 .ships-element {
-    background-color: gray;
+    background-color: rgba(0, 230, 0, 0.5);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+}
+
+.play-button-background {
+    background-color: #524e4e;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-button {
+    cursor: pointer;
+    background-color: #ff0000;
+    height: 45px;
+    width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+}
+
+.play-button:active {
+    height: 40px;
+    width: 40px;
+    font-size: 12px;
+}
+
+.play-button,
+.play-button-background {
+    border-radius: 50%;
 }
 
 /* .missed-hit-div {
