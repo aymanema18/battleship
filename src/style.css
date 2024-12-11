@@ -134,6 +134,11 @@ main {
     border-radius: 50%;
 }
 
+.new-game-button {
+    cursor: pointer;
+    font-weight: 700;
+}
+
 /* .missed-hit-div {
     background-color: gray;
     height: 50%;
