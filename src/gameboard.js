@@ -131,8 +131,8 @@ function gameBoard() {
         ['30', '31', '32', '33', '34', '35', '36', '37', '38', '39'],
         ['40', '41', '42', '43', '44', '45', '46', '47', '48', '49'],
         ['50', '51', '52', '53', '54', '55', '56', '57', '58', '59'],
-        ['60', '61', '62', '63', '64', '65', '06', '67', '68', '69'],
-        ['70', '71', '72', '73', '04', '75', '76', '77', '78', '79'],
+        ['60', '61', '62', '63', '64', '65', '66', '67', '68', '69'],
+        ['70', '71', '72', '73', '74', '75', '76', '77', '78', '79'],
         ['80', '81', '82', '83', '84', '85', '86', '87', '88', '89'],
         ['90', '91', '92', '93', '94', '95', '96', '97', '98', '99'],
     ];
@@ -227,6 +227,17 @@ function gameBoard() {
 function placeShips(direction, cords, board, refBoard, ships, index) {
     let row = cords[0] * 1;
     let col = cords[1] * 1;
+
+    console.log(`______________________`);
+    console.log(`${ships[index].id}:`);
+    console.log(`row: ${row}`);
+    console.log(`col: ${col}`);
+    console.log(`direction: ${direction}`);
+    console.log(`board:`);
+    console.log(board);
+    console.log(`refBoard:`);
+    console.log(refBoard);
+
     if (direction > 5) {
         if (index === 0) {
             let flag = true;
@@ -342,7 +353,7 @@ function placeShips(direction, cords, board, refBoard, ships, index) {
                 if (i === 0) {
                     refBoard[row].splice(
                         refBoard[row].indexOf(`${row}${col}`),
-                        ships[index].length + 1,
+                        ships[index].length,
                     );
 
                     if (col > 0) {
@@ -352,36 +363,144 @@ function placeShips(direction, cords, board, refBoard, ships, index) {
                         );
                     }
 
+                    let cord = [];
                     if (row > 0) {
-                        refBoard[row - 1].splice(
-                            refBoard[row - 1].indexOf(`${row - 1}${col}`),
-                            ships[index].length + 1,
-                        );
-
+                        let secondFlag = true;
+                        for (let j = 0; j < ships[index].length; j++) {
+                            if (
+                                refBoard[row - 1].indexOf(
+                                    `${row - 1}${col + j}`,
+                                ) !== -1
+                            ) {
+                                secondFlag = false;
+                                cord.push(`${row - 1}${col + j}`);
+                            }
+                        }
                         if (col > 0) {
-                            refBoard[row - 1].splice(
+                            if (
+                                refBoard[row].indexOf(`${row}${col - 1}`) !== -1
+                            ) {
+                                cord.push(`${row}${col - 1}`);
+                            }
+                            if (
                                 refBoard[row - 1].indexOf(
                                     `${row - 1}${col - 1}`,
-                                ),
-                                1,
-                            );
+                                ) !== -1
+                            ) {
+                                cord.push(`${row - 1}${col - 1}`);
+                            }
                         }
+
+                        if (
+                            refBoard[row].indexOf(
+                                `${row}${col + ships[index].length}`,
+                            ) !== -1
+                        ) {
+                            if (
+                                cord.indexOf(
+                                    `${row}${col + ships[index].length}`,
+                                ) === -1
+                            ) {
+                                cord.push(`${row}${col + ships[index].length}`);
+                            }
+                        }
+                        if (
+                            refBoard[row - 1].indexOf(
+                                `${row - 1}${col + ships[index].length}`,
+                            ) !== -1
+                        ) {
+                            cord.push(`${row - 1}${col + ships[index].length}`);
+                        }
+
+                        ///////////
+
+                        // refBoard[row - 1].splice(
+                        //     refBoard[row - 1].indexOf(`${row - 1}${col}`),
+                        //     ships[index].length + 1,
+                        // );
+
+                        // if (col > 0) {
+                        //     refBoard[row - 1].splice(
+                        //         refBoard[row - 1].indexOf(
+                        //             `${row - 1}${col - 1}`,
+                        //         ),
+                        //         1,
+                        //     );
+                        // }
                     }
 
                     if (row < 9) {
-                        refBoard[row + 1].splice(
-                            refBoard[row + 1].indexOf(`${row + 1}${col}`),
-                            ships[index].length + 1,
-                        );
-
+                        let secondFlag = true;
+                        for (let j = 0; j < ships[index].length; j++) {
+                            if (
+                                refBoard[row + 1].indexOf(
+                                    `${row + 1}${col + j}`,
+                                ) !== -1
+                            ) {
+                                secondFlag = false;
+                                cord.push(`${row + 1}${col + j}`);
+                            }
+                        }
                         if (col > 0) {
-                            refBoard[row + 1].splice(
+                            if (
+                                refBoard[row].indexOf(`${row}${col - 1}`) !== -1
+                            ) {
+                                cord.push(`${row}${col - 1}`);
+                            }
+                            if (
                                 refBoard[row + 1].indexOf(
                                     `${row + 1}${col - 1}`,
-                                ),
-                                1,
-                            );
+                                ) !== -1
+                            ) {
+                                cord.push(`${row + 1}${col - 1}`);
+                            }
                         }
+
+                        if (
+                            refBoard[row].indexOf(
+                                `${row}${col + ships[index].length}`,
+                            ) !== -1
+                        ) {
+                            if (
+                                cord.indexOf(
+                                    `${row}${col + ships[index].length}`,
+                                ) === -1
+                            ) {
+                                cord.push(`${row}${col + ships[index].length}`);
+                            }
+                        }
+                        if (
+                            refBoard[row + 1].indexOf(
+                                `${row + 1}${col + ships[index].length}`,
+                            ) !== -1
+                        ) {
+                            cord.push(`${row + 1}${col + ships[index].length}`);
+                        }
+
+                        ///////////
+
+                        // refBoard[row + 1].splice(
+                        //     refBoard[row + 1].indexOf(`${row + 1}${col}`),
+                        //     ships[index].length + 1,
+                        // );
+
+                        // if (col > 0) {
+                        //     refBoard[row + 1].splice(
+                        //         refBoard[row + 1].indexOf(
+                        //             `${row + 1}${col - 1}`,
+                        //         ),
+                        //         1,
+                        //     );
+                        // }
+
+                        console.log('|||||||||||||||||||||||||||||||| cord:');
+                        console.log(cord);
+                    }
+                    for (let j = 0; j < cord.length; j++) {
+                        refBoard[cord[j][0] * 1].splice(
+                            refBoard[cord[j][0] * 1].indexOf(cord[j]),
+                            1,
+                        );
                     }
                 }
             }
