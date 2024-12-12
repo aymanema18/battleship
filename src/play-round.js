@@ -187,37 +187,6 @@ function playRound(turn, player, computer) {
             }
         }, 500);
     }
-
-    // if (turn === 'player') {
-    //     playerCells.forEach((cell) => {
-    //         cell.removeEventListener('click', clickPlayerCell);
-    //     });
-
-    //     computerCells.forEach((cell) => {
-    //         if (computer) cell.style.cursor = 'pointer';
-    //         cell.addEventListener('click', clickComputerCell);
-    //     });
-
-    //     for (let i = 0; i < computer.board.board.length; i++) {
-    //         for (let j = 0; j < computer.board.board[i].length; j++) {
-    //             if (computer.board.board[i][j].ship !== null) {
-    //                 let tempCell = document.querySelector(
-    //                     `[data-row="${i}"][data-col="${j}"]`,
-    //                 );
-    //                 tempCell.removeEventListener('click', clickComputerCell);
-    //                 tempCell.style.cursor = 'auto';
-    //             }
-    //         }
-    //     }
-    // } else {
-    //     computerCells.forEach((cell) => {
-    //         cell.removeEventListener('click', clickComputerCell);
-    //     });
-
-    //     playerCells.forEach((cell) => {
-    //         cell.addEventListener('click', clickPlayerCell);
-    //     });
-    // }
 }
 
 export { playRound };

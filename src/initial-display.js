@@ -284,7 +284,6 @@ function initDisplay() {
 
     for (let i = 0; i < computerPlayer.board.board.length; i++) {
         for (let j = 0; j < computerPlayer.board.board[i].length; j++) {
-            // playerBoard[i].cols.push({ row: i, col: j, clicked: false });
             computerBoardHTMLElements.push(document.createElement('div'));
             computerBoardHTMLElements[
                 computerBoardHTMLElements.indexOf(
@@ -306,120 +305,6 @@ function initDisplay() {
                     computerBoardHTMLElements.at(-1),
                 )
             ].classList.add('computer-board-cell');
-            if (computerPlayer.board.board[i][j].ship !== null) {
-                if (
-                    typeof computerPlayer.board.board[i][j + 1] !==
-                        'undefined' &&
-                    computerPlayer.board.board[i][j + 1].ship !== null
-                ) {
-                    if (
-                        computerPlayer.board.board[i][j + 1].ship ===
-                        computerPlayer.board.board[i][j].ship
-                    ) {
-                        // for (let k = 0; k < ships.length; k++) {
-                        //     if (
-                        //         ships[k].ship ===
-                        //             player.board.board[i][j].ship &&
-                        //         ships[k].checked === false
-                        //     ) {
-                        //         ships[k].checked = true;
-                        //         ships[k].colCord1 = j + 1;
-                        //         ships[k].colCord2 = j + ships[k].length + 1;
-                        //         ships[k].rowCord1 = i + 1;
-                        //         ships[k].rowCord2 = i + 2;
-                        //         ships[k].direction = 'right';
-                        //         shipsHTMLElements.push(
-                        //             document.createElement('div'),
-                        //         );
-                        //         shipsHTMLElements[
-                        //             shipsHTMLElements.indexOf(
-                        //                 shipsHTMLElements.at(-1),
-                        //             )
-                        //         ].classList.add(ships[k].ship);
-                        //     }
-                        // }
-                    }
-                } else {
-                    if (
-                        typeof computerPlayer.board.board[i + 1] !== 'undefined'
-                    ) {
-                        if (
-                            computerPlayer.board.board[i + 1][j].ship ===
-                            computerPlayer.board.board[i][j].ship
-                        ) {
-                            // for (let k = 0; k < ships.length; k++) {
-                            //     if (
-                            //         ships[k].ship ===
-                            //             player.board.board[i][j].ship &&
-                            //         ships[k].checked === false
-                            //     ) {
-                            //         ships[k].checked = true;
-                            //         ships[k].colCord1 = j + 1;
-                            //         ships[k].colCord2 = j + 2;
-                            //         ships[k].rowCord1 = i + 1;
-                            //         ships[k].rowCord2 = i + ships[k].length + 1;
-                            //         ships[k].direction = 'down';
-                            //         shipsHTMLElements.push(
-                            //             document.createElement('div'),
-                            //         );
-                            //         shipsHTMLElements[
-                            //             shipsHTMLElements.indexOf(
-                            //                 shipsHTMLElements.at(-1),
-                            //             )
-                            //         ].classList.add(ships[k].ship);
-                            //     }
-                            // }
-                        } else {
-                            // for (let k = 0; k < ships.length; k++) {
-                            //     if (
-                            //         ships[k].ship ===
-                            //             player.board.board[i][j].ship &&
-                            //         ships[k].checked === false
-                            //     ) {
-                            //         ships[k].checked = true;
-                            //         ships[k].colCord1 = j + 1;
-                            //         ships[k].colCord2 = j + ships[k].length + 1;
-                            //         ships[k].rowCord1 = i + 1;
-                            //         ships[k].rowCord2 = i + ships[k].length + 1;
-                            //         shipsHTMLElements.push(
-                            //             document.createElement('div'),
-                            //         );
-                            //         shipsHTMLElements[
-                            //             shipsHTMLElements.indexOf(
-                            //                 shipsHTMLElements.at(-1),
-                            //             )
-                            //         ].classList.add(ships[k].ship);
-                            //     }
-                            // }
-                        }
-                    } else {
-                        // for (let k = 0; k < ships.length; k++) {
-                        //     if (
-                        //         ships[k].ship ===
-                        //             player.board.board[i][j].ship &&
-                        //         ships[k].checked === false
-                        //     ) {
-                        //         ships[k].checked = true;
-                        //         ships[k].colCord1 = j + 1;
-                        //         ships[k].colCord2 = j + ships[k].length + 1;
-                        //         ships[k].rowCord1 = i + 1;
-                        //         ships[k].rowCord2 = i + ships[k].length + 1;
-                        //         shipsHTMLElements.push(
-                        //             document.createElement('div'),
-                        //         );
-                        //         shipsHTMLElements[
-                        //             shipsHTMLElements.indexOf(
-                        //                 shipsHTMLElements.at(-1),
-                        //             )
-                        //         ].classList.add(ships[k].ship);
-                        //     }
-                        // }
-                    }
-                }
-                // boardHTMLElements[
-                //     boardHTMLElements.indexOf(boardHTMLElements.at(-1))
-                // ].style.backgroundColor = 'rgba(0,255,0, 0.5)';
-            }
         }
     }
 
@@ -483,21 +368,6 @@ function initDisplay() {
         computerBoardContainer.appendChild(computerBoardHTMLElements[i]);
     }
     for (let i = 0; i < ships.length; i++) {
-        // let img = document.createElement('img');
-        // if (ships[i].length === 4) {
-        //     img.src = c;
-        // } else if (ships[i].length === 3) {
-        //     img.src = b;
-        // } else if (ships[i].length === 2) {
-        //     img.src = d;
-        // } else {
-        //     img.src = pb;
-        // }
-        // img.style.height = '100%';
-        // img.style.width = '100%';
-        // if (ships[i].direction === 'down') {
-        //     img.style.transform = 'rotate(90deg)';
-        // }
         shipsHTMLElements[i].classList.add('ships-element');
         shipsHTMLElements[i].style.gridRow =
             `${ships[i].rowCord1} / ${ships[i].rowCord2}`;
@@ -505,12 +375,9 @@ function initDisplay() {
         shipsHTMLElements[i].style.gridColumn =
             `${ships[i].colCord1} / ${ships[i].colCord2}`;
 
-        // shipsHTMLElements[i].appendChild(img);
         boardContainer.appendChild(shipsHTMLElements[i]);
     }
 
-    // let divRowIndexPlayer = document.createElement('div');
-    // let div;
     startGame(player, computerPlayer);
 }
 
