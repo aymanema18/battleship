@@ -87,21 +87,24 @@ function playRound(turn, player, computer) {
             1,
         );
 
-        playerCells.forEach((cell) => {
-            if (
-                typeof availablePlayerCells[cell.getAttribute('data-row') * 1][
-                    availablePlayerCells[
-                        cell.getAttribute('data-row') * 1
-                    ].indexOf(
-                        `${cell.getAttribute('data-row') * 1}${cell.getAttribute('data-col') * 1}`,
-                    )
-                ] !== 'undefined'
-            ) {
-                cell.addEventListener('click', clickPlayerCell);
-            }
-        });
         let check = gameOver(computer);
         if (!check) {
+            playerCells.forEach((cell) => {
+                if (
+                    typeof availablePlayerCells[
+                        cell.getAttribute('data-row') * 1
+                    ][
+                        availablePlayerCells[
+                            cell.getAttribute('data-row') * 1
+                        ].indexOf(
+                            `${cell.getAttribute('data-row') * 1}${cell.getAttribute('data-col') * 1}`,
+                        )
+                    ] !== 'undefined'
+                ) {
+                    cell.addEventListener('click', clickPlayerCell);
+                }
+            });
+
             row = Math.floor(Math.random() * availablePlayerCells.length);
             while (availablePlayerCells[row].length === 0) {
                 if (row < 9) {
