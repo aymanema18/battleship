@@ -139,9 +139,10 @@ main {
     font-weight: 700;
 }
 
-/* .missed-hit-div {
-    background-color: gray;
-    height: 50%;
-    width: 50%;
-    border-radius: 50px;
-} */
+.random {
+    grid-column: 2 / 3;
+    justify-self: center;
+    font-weight: 700;
+    padding-top: 8px;
+    cursor: pointer;
+}

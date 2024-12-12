@@ -128,6 +128,7 @@ function initDisplay() {
     let playButtonContainer = document.createElement('div');
     let playButtonBackground = document.createElement('div');
     let playButton = document.createElement('div');
+    let random = document.createElement('div');
 
     playerSection.classList.add('player-board');
     playerSection.classList.add('boards');
@@ -143,6 +144,8 @@ function initDisplay() {
     playButtonContainer.classList.add('button-container');
     playButton.classList.add('play-button');
     playButtonBackground.classList.add('play-button-background');
+    random.classList.add('random');
+    random.textContent = 'Random';
 
     // for (let i = 0; i < ships.length; i++) {
     //     shipsHTMLElements[i] = document.createElement('div');
@@ -452,11 +455,16 @@ function initDisplay() {
     playerSection.appendChild(colIndex);
     playerSection.appendChild(rowIndex);
     playerSection.appendChild(boardContainer);
+    playerSection.appendChild(random);
     computerSection.appendChild(computerColIndex);
     computerSection.appendChild(computerRowIndex);
     computerSection.appendChild(computerBoardContainer);
 
     playButton.innerHTML = 'Play';
+
+    random.addEventListener('click', () => {
+        initDisplay();
+    });
 
     for (let i = 0; i < boardHTMLElements.length; i++) {
         let row = boardHTMLElements[i].getAttribute('data-row') * 1;
